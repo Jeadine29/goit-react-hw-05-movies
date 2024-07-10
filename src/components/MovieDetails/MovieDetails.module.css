@@ -1,3 +1,23 @@
-.container {
-    padding: 20px;
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.nav-link {
+    margin: 0 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.active-link {
+    font-weight: bold;
 }

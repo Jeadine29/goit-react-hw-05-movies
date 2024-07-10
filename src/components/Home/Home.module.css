@@ -1,5 +1,5 @@
-.container {
-    padding: 20px;
+h1 {
+    text-align: center;
 }
 
 ul {
@@ -8,5 +8,14 @@ ul {
 }
 
 li {
-    margin: 10px 0;
+    margin: 0.5rem 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
 }

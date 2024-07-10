@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { useParams, NavLink, useMatch } from 'react-router-dom';
 import { getMovieDetails } from '../../Api/api';
-import styles from './MovieDetails.module.css';
+import './MovieDetails.module.css';
 
-const MovieDetails = () => {
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
+
+function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const castMatch = useMatch('/movies/:movieId/cast');
+  const reviewsMatch = useMatch('/movies/:movieId/reviews');
 
   useEffect(() => {
     getMovieDetails(movieId).then(setMovie);
   }, [movieId]);
 
-  if (!movie) return <div>Loading...</div>;
+  if (!movie) return null;
 
   return (
-    <div className={styles.container}>
+    <div>
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
-      <Outlet />
+      <nav>
+        <NavLink to={`/movies/${movieId}/cast`} className="nav-link" activeClassName="active-link">Cast</NavLink>
+        <NavLink to={`/movies/${movieId}/reviews`} className="nav-link" activeClassName="active-link">Reviews</NavLink>
+      </nav>
+      <Suspense fallback={<div>Loading...</div>}>
+        {castMatch && <Cast />}
+        {reviewsMatch && <Reviews />}
+      </Suspense>
     </div>
   );
-};
+}
 
 export default MovieDetails;
