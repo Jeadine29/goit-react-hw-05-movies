@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieReviews } from '../../Api/api';
-import './Reviews.module.css';
+import { useEffect, useState } from 'react';
+import { getReviews } from 'Api/apiService';
 
-function Reviews() {
+const Reviews = () => {
+  const [reviewsList, setReviewsList] = useState([]);
   const { movieId } = useParams();
-  const [reviews, setReviews] = useState([]);
-
   useEffect(() => {
-    getMovieReviews(movieId).then(data => setReviews(data.results));
+    getReviews(movieId).then(data => setReviewsList(data.results));
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Reviews</h2>
-      <ul>
-        {reviews.map(review => (
-          <li key={review.id}>
-            <p>{review.author}</p>
-            <p>{review.content}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {reviewsList.length > 0
+        ? reviewsList.map(({ author, content, id }) => (
+            <li key={id}>
+              <h3>{author}</h3>
+              <p>{content}</p>
+            </li>
+          ))
+        : "Sorry, we don't have any review for this movie"}
+    </ul>
   );
-}
-
+};
 export default Reviews;
