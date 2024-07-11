@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/168.f0937fa8.chunk.css","mappings":"AAIA,MAHI,iBAOJ,CAJA,GACI,eAAgB,CAChB,SAEJ,CAEA,GACI,cACJ","sources":["components/Reviews/Reviews.module.css"],"sourcesContent":["h2 {\n    text-align: center;\n}\n\nul {\n    list-style: none;\n    padding: 0;\n    text-align: center;\n}\n\nli {\n    margin: 0.5rem 0;\n}"],"names":[],"sourceRoot":""}
